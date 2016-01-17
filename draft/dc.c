@@ -14,12 +14,15 @@ main() {
 
   while(1) {
     if(Flag) {
-      LED=0;
+      LED=1;
       PWM_ON++;
     }
     else {
       LED=1;
       PWM_ON--;
+    }
+    if(!PWM_ON){
+      LED=0;
     }
 
   }
