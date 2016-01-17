@@ -11,21 +11,15 @@ void delay(unsigned int cnt) {
 
 
 main() {
-  bit Flag;
 
   while(1) {
     if(Flag) {
+      LED=0;
       PWM_ON++;
     }
     else {
-      PWM_ON--;
-    }
-
-    if (PWM_ON==0) {
-      LED=0;
-    }
-    else {
       LED=1;
+      PWM_ON--;
     }
 
   }
