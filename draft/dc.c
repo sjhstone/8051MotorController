@@ -13,17 +13,17 @@ void delay(unsigned int cnt) {
 main() {
 
   while(1) {
+    LED = 0;
     if(Flag) {
-      LED=1;
       PWM_ON++;
     }
     else {
-      LED=1;
       PWM_ON--;
     }
     if(!PWM_ON){
-      LED=0;
+      LED=1;
     }
+    delay(20000);;
 
   }
 
