@@ -15,17 +15,16 @@ sbit PWMSignal = P1^1;  // OUT: PWM signal
 sbit SpdUp     = P0^0;  // IN:  speed up
 sbit SpdDn     = P0^1;  // IN:  speed down
 UINT8 i;
-UINT8 Cycle = 25;
 UINT8 DutyOn = 0;
 
-void delay (UINT16 units) {
+void delay(UINT16 units) {
   UINT8 loopPerUnit = 60;
   while (units--) {
     for (i = 0; i < loopPerUnit; i++);
   }
 }
 
-void main( void ) {
+void main(void) {
   PWMSignal = 0;
   while(1) {
     if (!SpdUp) {

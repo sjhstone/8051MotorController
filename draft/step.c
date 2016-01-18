@@ -15,7 +15,7 @@ sbit B1 = P1^5;
 sbit C1 = P1^6;
 sbit D1 = P1^7;
 
-// 1 input ports
+// 3 input ports
 sbit SLOWER = P0^0;
 sbit FASTER = P0^1;
 sbit chgDir = P0^2;
@@ -38,7 +38,7 @@ sbit chgDir = P0^2;
 #define Coil_Off() { A1 = 0; B1 = 0; C1 = 0; D1 = 0;}
 
 
-void delay (UINT16 units) {
+void delay(UINT16 units) {
   UINT8 loopPerUnit = 114;
   // will delay about 1 ms if loopPerUnit = 114 
   while (units--) {
@@ -46,7 +46,7 @@ void delay (UINT16 units) {
   }
 }
 
-void main( void ) {
+void main(void) {
   UINT8 interval;
   interval = 100;
   while(1) {
