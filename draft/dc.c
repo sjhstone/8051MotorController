@@ -19,24 +19,24 @@ UINT8 Cycle = 25;
 UINT8 DutyOn = 0;
 
 void delay (UINT16 units) {
-	UINT8 loopPerUnit = 60;
+  UINT8 loopPerUnit = 60;
   while (units--) {
     for (i = 0; i < loopPerUnit; i++);
   }
 }
 
 void main( void ) {
-	PWMSignal = 0;
+  PWMSignal = 0;
   while(1) {
-		if (!SpdUp) {
-			DutyOn += DutyOn < 255 ? 1 : 0;
-		}
-		if (!SpdDn) {
-			DutyOn -= DutyOn > 1 ? 1 : 0;
-		}
-		PWMSignal = 1;
-		delay(DutyOn);
-		PWMSignal = 0;
-		delay(255 - DutyOn);
-	}
+    if (!SpdUp) {
+      DutyOn += DutyOn < 255 ? 1 : 0;
+    }
+    if (!SpdDn) {
+      DutyOn -= DutyOn > 1 ? 1 : 0;
+    }
+    PWMSignal = 1;
+    delay(DutyOn);
+    PWMSignal = 0;
+    delay(255 - DutyOn);
+  }
 }
