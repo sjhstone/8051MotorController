@@ -43,41 +43,41 @@ void main( void ) {
   while(1) {
     if (!ANTICLOCKWISE) {
       Coil_A1_CCW();
-      interval(interval);
+      delay(interval);
       Coil_A1B1_CCW();
-      interval(interval);
+      delay(interval);
       Coil_B1_CCW();
-      interval(interval);
+      delay(interval);
       Coil_B1C1_CCW();
-      interval(interval);
+      delay(interval);
       Coil_C1_CCW();
-      interval(interval);
+      delay(interval);
       Coil_C1D1_CCW();
-      interval(interval);
+      delay(interval);
       Coil_D1_CCW();
-      interval(interval);
+      delay(interval);
       Coil_D1A1_CCW();
-      interval(interval);
+      delay(interval);
     }
     else {
       Coil_D1_CCW();
-      interval(interval);
+      delay(interval);
       Coil_D1C1_CCW();
-      interval(interval);
+      delay(interval);
       Coil_C1_CCW();
-      interval(interval);
+      delay(interval);
       Coil_C1B1_CCW();
-      interval(interval);
+      delay(interval);
       Coil_B1_CCW();
-      interval(interval);
+      delay(interval);
       Coil_B1A1_CCW();
-      interval(interval);
+      delay(interval);
       Coil_A1_CCW();
-      interval(interval);
+      delay(interval);
       Coil_A1D1_CCW();
-      interval(interval);
+      delay(interval);
       Coil_D1_CCW();
-      interval(interval);
+      delay(interval);
     }
   }
   while(2);
