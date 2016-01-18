@@ -55,7 +55,7 @@ void DC_delay(UINT16 units) {
 }
 
 void STP_delay(UINT16 units) {
-  UINT8 loopPerUnit = 114;
+  UINT8 loopPerUnit = 15;
   // will delay about 1 ms if loopPerUnit = 114 
   while (units--) {
     for (i = 0; i < loopPerUnit; i++);
@@ -75,8 +75,7 @@ void runDC(void) {
     }
     if (!SpdUp) {
       DC_DutyOn += DC_DutyOn < 255 ? 1 : 0;
-    }
-    if (!SpdDn) {
+    } else if (!SpdDn) {
       DC_DutyOn -= DC_DutyOn > 64 ? 1 : 0;
     }
     DCM_OUT = 1; DC_delay(DC_DutyOn);
@@ -87,16 +86,15 @@ void runDC(void) {
 void runStep(void) {
   bit initState = M_TYPE;
   UINT8 STP_itv;
-  STP_itv = 10;
+  STP_itv = 50;
   while(1) {
     if (M_TYPE != initState) {
       return;
     }
     if (!SpdUp) {
-      STP_itv -= STP_itv > 5 ? 1 : 0;
-    }
-    if (!SpdDn) {
-      STP_itv += STP_itv < 15 ? 1 : 0;
+      STP_itv -= STP_itv > 10 ? 1 : 0;
+    } else if (!SpdDn) {
+      STP_itv += STP_itv < 90 ? 1 : 0;
     }
     if (!STP_dir) {
       Coil_A1_ph();   STP_delay(STP_itv);

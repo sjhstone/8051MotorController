@@ -20,7 +20,7 @@ sbit SpdDn  = P0^1;  // IN: speed down
  * DC I/O
  */
 sbit DCM_OUT = P1^1;
-UINT8 DC_DutyOn = 65;
+UINT8 DC_DutyOn = 0;
 /*
  * Step I/O
  */
@@ -77,10 +77,12 @@ void runDC(void) {
       DC_DutyOn += DC_DutyOn < 255 ? 1 : 0;
     }
     if (!SpdDn) {
-      DC_DutyOn -= DC_DutyOn > 64 ? 1 : 0;
+      DC_DutyOn -= DC_DutyOn > 1 ? 1 : 0;
     }
-    DCM_OUT = 1; DC_delay(DC_DutyOn);
-    DCM_OUT = 0; DC_delay(255 - DC_DutyOn);
+    DCM_OUT = 1;
+    DC_delay(DC_DutyOn);
+    DCM_OUT = 0;
+    DC_delay(255 - DC_DutyOn);
   }
 }
 
