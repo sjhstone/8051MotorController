@@ -32,7 +32,7 @@ sbit ANTICLOCKWISE = P0^1;
 #define Coil_Off() { A1 = 0; B1 = 0; C1 = 0; D1 = 0;}
 
 // Delay: unsigned char 0-65536
-void DelayMs( UINT16 Ms )
+void delay( UINT16 Ms )
 {
   UINT8 i;
   UINT8 loopAMs = 114;
@@ -41,6 +41,9 @@ void DelayMs( UINT16 Ms )
   }
 }
 
+void dc_delay(unsigned int cnt) {
+  while(cnt--);
+}
 /*
   DC Part
 */
@@ -67,7 +70,7 @@ void main( void ) {
     if(!PWM_ON){
       LED=1;
     }
-    delay(20000);
+    dc_delay(dc_interval-PWM_ON);
 
 
     if (!ANTICLOCKWISE) {
