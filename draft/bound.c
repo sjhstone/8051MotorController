@@ -78,7 +78,7 @@ void main( void ) {
       }
       dc_delay(dc_interval-PWM_ON);
     }
-    else {
+    if (Switcher) {
         if (!ANTICLOCKWISE) {
         Coil_A1_CCW();
         delay(s_interval);
