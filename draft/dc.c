@@ -1,53 +1,42 @@
-#include<reg52.h>     //Header file
+#include <reg52.h>
 
-sbit LED = P1^1;      //Define Led
-sbit Flag = P0^0;
-unsigned char CYCLE;  //Define period
-unsigned char PWM_ON ;//Define the time of high level
+/* Variable Speed DC Motor Driver (PWM Implementation)
+ * Shi Jiahe (STONE), Chen Chen (Roy Chan), JAN 2016
+ * SIST, ShanghaiTech University
+ * ---------------------------------------------------
+ * A cycle lasts about 0.13 s by default.
+ * Adding an LED at the output helps visualizing the way PWM works.
+ */
 
-void delay(unsigned int cnt) {
-    while(--cnt);
-}
+typedef unsigned char UINT8;
+typedef unsigned int  UINT16;
 
+sbit PWMSignal = P1^1;  // OUT: PWM signal
+sbit SpdUp     = P0^0;  // IN:  speed up
+sbit SpdDn     = P0^1;  // IN:  speed down
+UINT8 i;
+UINT8 Cycle = 25;
+UINT8 DutyOn = 0;
 
-main() {
-
-  while(1) {
-    LED = 0;
-    if(Flag) {
-      PWM_ON++;
-    }
-    else {
-      PWM_ON--;
-    }
-    if(!PWM_ON){
-      LED=1;
-    }
-    delay(20000);;
-
+void delay (UINT16 units) {
+	UINT8 loopPerUnit = 60;
+  while (units--) {
+    for (i = 0; i < loopPerUnit; i++);
   }
-
 }
-// /******************************************************************/
-// /*                    Timer interrupt routine                     */
-// /******************************************************************/
-// void tim(void) interrupt 1 using 1
-// {
-// static unsigned char count; 
-// TH0=(65536-100)/256; 
-// TL0=(65536-100)%256;     //0.1mS 
 
-// if (count==PWM_ON)
-//     {
-//      LED = 1;             
-//     }
-//   count++;
-// if(count == CYCLE)
-//     {
-//     count=0;
-//     if(PWM_ON!=0)       
-//        LED = 0;        
-
-//     }
-
-// }
+void main( void ) {
+	PWMSignal = 0;
+  while(1) {
+		if (!SpdUp) {
+			DutyOn += DutyOn < 255 ? 1 : 0;
+		}
+		if (!SpdDn) {
+			DutyOn -= DutyOn > 1 ? 1 : 0;
+		}
+		PWMSignal = 1;
+		delay(DutyOn);
+		PWMSignal = 0;
+		delay(255 - DutyOn);
+	}
+}
