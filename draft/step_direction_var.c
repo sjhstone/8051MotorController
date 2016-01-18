@@ -37,7 +37,7 @@ void DelayMs( UINT16 Ms )
 #define Coil_D1_CCW()   { A1 = 0; B1 = 0; C1 = 0; D1 = 1;}
 #define Coil_D1A1_CCW() { A1 = 1; B1 = 0; C1 = 0; D1 = 1;}
 
-#define Coil_Clockwise() {
+void Coil_Clockwise() {
   Coil_A1_CCW();
   interval(10);
   Coil_A1B1_CCW();
@@ -61,7 +61,7 @@ void DelayMs( UINT16 Ms )
 #define Coil_B1A1_CCW() { A1 = 1; B1 = 1; C1 = 0; D1 = 0;}
 #define Coil_A1D1_CCW() { A1 = 1; B1 = 0; C1 = 0; D1 = 1;}
 
-#define Coil_AntiClockwise() {
+void Coil_AntiClockwise() {
   Coil_D1_CCW();
   interval(10);
   Coil_D1C1_CCW();
